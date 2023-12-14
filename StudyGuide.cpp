@@ -6,9 +6,39 @@
 
 using namespace std; //includes entire std library; warning:updates in std can cause program errors
 
-
-int main() // begin program
+//most common recursive function example. factorial calls itself until n = 1.
+unsigned long long Factorial(int num1)
 {
+    if(num1==1 || num1==0)
+    {
+        return 1LL;
+    }
+    else
+    {
+        return num1 *Factorial(num1-1);
+    }
+}
+
+//function overloading
+int Add(int intNum1, int intNum2 )
+{
+    return intNum1 + intNum2;
+}
+
+/*inlining means the body of the function gets substituted at the point of the function call, meaning
+Add() would turn into return floatNum1 + floatNum2. Mostly used for small functions. Can improve performance*/
+inline float Add(float floatNum1, float floatNum2) { return floatNum1 + floatNum2; }
+
+int main(int argc, char* argv[]) // begin program
+//First element of argv is the program; the remaining are arguments passed to the program. argc is argument count.
+//arguments can be added through properties
+{
+    for (int i{0}; i < argc; i++)
+    {
+        cout << argv[i] << endl;
+        cout << argc << endl;
+    }
+
     cout << "learning C++ yay"<< endl; // send string to the console then end the line
 
     //most common data types
@@ -84,11 +114,8 @@ int main() // begin program
     }
 
     int studyArray[2][2] {{1,2},{3,4}}; //multidimensional array
-
     array<int,3>stdarray {1,2,3}; //std array
-
     vector <int> myVector {1,2,3,4,5}; //dynamic sizing and remember their size
-
     vector<vector<int>> vector2D (3, vector<int>(10)); //parenthesis initialize the vector; 3 rows and 10 columns of vectors
     vector2D[1][2] = 42;
 
@@ -103,9 +130,9 @@ int main() // begin program
 
     class People
     {
-    public:
+    public: //can be used anywhere in the program
         string getHairColor() { return hairColor; }
-    private:
+    private: //can only be accessed by People
         string hairColor{"brown"};
 
     };
@@ -113,5 +140,8 @@ int main() // begin program
     People Arron;
     cout << Arron.getHairColor() << endl;
 
+cout << Factorial(16) << endl;
+
+//
     return 0; //end program. compiler would also add by default
 }
