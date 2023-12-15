@@ -128,20 +128,19 @@ int main(int argc, char* argv[]) // begin program
     unsigned int rollNum = (rand() % 6) + 1;
     cout << rollNum << endl;
 
-    class People
-    {
-    public: //can be used anywhere in the program
-        string getHairColor() { return hairColor; }
-    private: //can only be accessed by People
-        string hairColor{"brown"};
+    cout << Factorial(16) << endl;
 
-    };
+    int* pIntNum = &intNum; //points to the address intNum
+    cout << pIntNum << endl; 
 
-    People Arron;
-    cout << Arron.getHairColor() << endl;
+    const float* pFloatNum{&floatNum}; // pointer to const - floatNum cannot be changed via pointer
+    cout << pFloatNum << endl;
 
-cout << Factorial(16) << endl;
+    long* const pLongNum = &longNum; // constant pointer - value/address cannot be changed.
+    cout << pLongNum << endl;
 
-//
+    const double* const pDoubleNum{&doubleNum}; // address stored in pointer and value pointed to cannot be changed.
+    cout << pDoubleNum << endl;
+
     return 0; //end program. compiler would also add by default
 }
