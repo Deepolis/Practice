@@ -4,6 +4,8 @@
 #include <vector>
 #include <array>
 #include <stdio.h>
+#include <memory>
+#include <cmath>
 using namespace std; //includes entire std library; warning:updates in std can cause program errors
 
 //most common recursive function example. factorial calls itself until n = 1.
@@ -154,14 +156,33 @@ int main(int argc, char* argv[]) // begin program
     delete[] pArrPtr;
     pArrPtr = 0;
 
-    
-    //unique_ptr<short>upShort{new short{100}}; 
-    // or
-    //unique_ptr<int>upInt{make_unique<int>{100}};
+    //smart poiters automatically deallocate memory when destroyed
+    unique_ptr<short>upShort{new short}; 
+    // or 
+    unique_ptr<int>U_Int{make_unique<int>(100)};
+    unique_ptr<vector<short>>U_Vector{new vector<short>(2)};
+    U_Vector->push_back(16);
+    cout << U_Vector->at(2) << endl; //2 is the third element in the vector
 
-    //shared_ptr<int>uniqueShort{make_unique<int>(100)};
+    //multiple shared pointers can point to the same memory location
+    shared_ptr<int>S_Short{make_shared<int>(100)};
+    shared_ptr<string[]> S_String{new string[3]};
+    S_String[0] = "Daniel";
+    S_String[1] = "Day";
+    S_String[2] = "Lewis";
+    cout << S_String[2] << endl;
 
-    //weak_ptr<float>upFloat{new float{50.f}};
+    //linked to a shared_ptr and has the same address. does not increase reference count 
+    weak_ptr<int>W_Short{S_Short};
 
-    return 0; //end program. compiler would also add by default
+    int& intNum2{intNum};
+    cout << intNum2 << endl;
+
+    int refAdd = Add(intNum2, intNum2);
+    cout << refAdd << endl;
+
+    enum class PrimaryColor : int {RED, Blue, Green, SizeofEnum};
+    PrimaryColor favoriteColor{PrimaryColor::RED};
+
+    return 0; //end procgram. compiler would also add by default
 }
