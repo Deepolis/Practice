@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <array>
-
+#include <stdio.h>
 using namespace std; //includes entire std library; warning:updates in std can cause program errors
 
 //most common recursive function example. factorial calls itself until n = 1.
@@ -15,7 +15,7 @@ unsigned long long Factorial(int num1)
     }
     else
     {
-        return num1 *Factorial(num1-1);
+        return num1 * Factorial(num1-1);
     }
 }
 
@@ -26,7 +26,7 @@ int Add(int intNum1, int intNum2 )
 }
 
 /*inlining means the body of the function gets substituted at the point of the function call, meaning
-Add() would turn into return floatNum1 + floatNum2. Mostly used for small functions. Can improve performance*/
+Add() would turn into return floatNum1 + floatNum2. Mostly used for small functions. Could improve performance*/
 inline float Add(float floatNum1, float floatNum2) { return floatNum1 + floatNum2; }
 
 int main(int argc, char* argv[]) // begin program
@@ -73,7 +73,7 @@ int main(int argc, char* argv[]) // begin program
 
 
     /* Explicit type conversion between 2 incompatible types
-    Cast epiVolume to a float. Common in random # generation.
+    Cast NarcaseDose to an int. Common in random # generation.
     Truncation: discarding the fractional part when a decimal is converted */
     int NarcanVolume{4};
     float NarcanDose{2.f};
@@ -107,7 +107,7 @@ int main(int argc, char* argv[]) // begin program
         cout << shortNum << endl;
     }
 
-    while(shortNum < 100)
+    while(shortNum < 10)
     {
         cout << shortNum;
         shortNum++;
@@ -141,6 +141,27 @@ int main(int argc, char* argv[]) // begin program
 
     const double* const pDoubleNum{&doubleNum}; // address stored in pointer and value pointed to cannot be changed.
     cout << pDoubleNum << endl;
+
+    //pHeap points to new data on heap that contains memory for an int that we initialize to 100.
+    //pHeap is the only way to access the new value
+    int* pHeap{new int{100}};
+    delete pHeap; // every new needs a delete else it will leak
+    //delete only deletes the new int 100 not pHeap so pHeap is now a dangling pointer. 
+    // pHeap still contains the address of memory
+    pHeap = 0;
+
+    int* pArrPtr { new int[5] {1,2,3,4,5}};
+    delete[] pArrPtr;
+    pArrPtr = 0;
+
+    
+    //unique_ptr<short>upShort{new short{100}}; 
+    // or
+    //unique_ptr<int>upInt{make_unique<int>{100}};
+
+    //shared_ptr<int>uniqueShort{make_unique<int>(100)};
+
+    //weak_ptr<float>upFloat{new float{50.f}};
 
     return 0; //end program. compiler would also add by default
 }
