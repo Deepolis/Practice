@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <memory>
 #include <cmath>
+#include "BaseCharacter.h"
+
 using namespace std; //includes entire std library; warning:updates in std can cause program errors
 
 //most common recursive function example. factorial calls itself until n = 1.
@@ -30,6 +32,12 @@ int Add(int intNum1, int intNum2 )
 /*inlining means the body of the function gets substituted at the point of the function call, meaning
 Add() would turn into return floatNum1 + floatNum2. Mostly used for small functions. Could improve performance*/
 inline float Add(float floatNum1, float floatNum2) { return floatNum1 + floatNum2; }
+
+inline void DoubleRoll(unsigned int& diceRoll)
+{
+    diceRoll += diceRoll;
+    cout << diceRoll << endl;
+}
 
 int main(int argc, char* argv[]) // begin program
 //First element of argv is the program; the remaining are arguments passed to the program. argc is argument count.
@@ -109,7 +117,7 @@ int main(int argc, char* argv[]) // begin program
         cout << shortNum << endl;
     }
 
-    while(shortNum < 10)
+    while(shortNum < 3)
     {
         cout << shortNum;
         shortNum++;
@@ -181,8 +189,16 @@ int main(int argc, char* argv[]) // begin program
     int refAdd = Add(intNum2, intNum2);
     cout << refAdd << endl;
 
+    unsigned int& diceRoll = rollNum;
+
+    DoubleRoll(diceRoll);
+
     enum class PrimaryColor : int {RED, Blue, Green, SizeofEnum};
     PrimaryColor favoriteColor{PrimaryColor::RED};
 
+    //include the file that contains the Base class. Instantiate Arron. Calls constructors which prints age to the console.
+    Base Arron(19);
+    Base Rictus(50);
+    
     return 0; //end procgram. compiler would also add by default
 }
