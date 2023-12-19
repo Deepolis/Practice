@@ -39,6 +39,15 @@ inline void DoubleRoll(unsigned int& diceRoll)
     cout << diceRoll << endl;
 }
 
+
+struct RectangleVar //data type that allows grouping of related variables
+{
+    int xCoor{};
+    int yCoor{};
+    int width{100};
+    int height{100};
+};
+
 int main(int argc, char* argv[]) // begin program
 //First element of argv is the program; the remaining are arguments passed to the program. argc is argument count.
 //arguments can be added through properties
@@ -197,8 +206,27 @@ int main(int argc, char* argv[]) // begin program
     PrimaryColor favoriteColor{PrimaryColor::RED};
 
     //include the file that contains the Base class. Instantiate Arron. Calls constructors which prints age to the console.
-    Base Arron(19);
-    Base Rictus(50);
-    
+    Base Arron(20, 50);
+    Arron.height = 74;
+
+    //Rictus pointer points to the memory address height and dereferences to allow us access.
+    unique_ptr<Base>Rictus{new Base(70, 50)};
+    // Rictus.height{70}; does not work because a pointer gives you the location of the value, therefore we must dereference first
+    (*Rictus).height = 69; //nightmare syntax
+    Rictus->height = 68; // The instance pointer gets the member from the arrow operator.
+
+    Base Samuel(20, 50); //calls constrctur with no parameters. 
+
+    Base CopySamuel{Samuel}; //calls copy constructor.
+    cout << *CopySamuel.grade << endl;
+
+    RectangleVar Uno;
+    RectangleVar Dos;
+
+    Uno.xCoor = 50;
+    Uno.yCoor = 0;
+    Dos.xCoor = 0;
+    Dos.yCoor = 50;
+   
     return 0; //end procgram. compiler would also add by default
 }
