@@ -12,14 +12,15 @@ class Base
 {
 public: //can be used anywhere in the program
     Base(int Age, int gradeValue); //sets up the class. initializes varibles and performs tasks we assign.
-    Base();
+
+    Base(const string NickName, short Age);
 
     /*creates a deep copy. deep copy pointers point to their own original
     elements therefore dereferencing a deep copy element will not create a remaining 
     dangling pointer.*/
     Base(const Base& BaseCopy);
     
-    Base(Base&& MoveBase);
+    Base(Base&& MoveBase); //Move constructor
 
     ~Base(); //deals with freeing memory and closing files and/or connection.
 
@@ -27,13 +28,15 @@ public: //can be used anywhere in the program
     short getLifespan() {return Lifespan; }
     short height;
     int* grade{};
+    static int GetBaseCount() {return BaseCount;}
 
 protected:
     
 private: //can only be accessed by People
     short Age{};
-    short Lifespan{};
-
+    const short Lifespan{};
+    string NickName{};
+    inline static int BaseCount{0}; // static can only be declared in the class.
 };
 
 #endif

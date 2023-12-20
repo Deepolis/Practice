@@ -228,5 +228,7 @@ int main(int argc, char* argv[]) // begin program
     Dos.xCoor = 0;
     Dos.yCoor = 50;
    
+    cout << Base::GetBaseCount() << endl;
+
     return 0; //end procgram. compiler would also add by default
 }
