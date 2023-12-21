@@ -5,8 +5,3 @@
 
 using namespace std;
 
-/*Hero::Hero(int Age)
-{
-    cout << "I am " << Age << " years old.";
-}
-*/

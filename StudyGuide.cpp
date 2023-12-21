@@ -9,6 +9,23 @@
 #include "BaseCharacter.h"
 
 using namespace std; //includes entire std library; warning:updates in std can cause program errors
+using namespace Arron;
+
+namespace Arron
+{
+    void printName(const string name)
+    {
+        cout << name << endl;
+    }
+}
+
+namespace Larry
+{
+    void printName(const string name)
+    {
+        cout << name << endl;
+    }
+}
 
 //most common recursive function example. factorial calls itself until n = 1.
 unsigned long long Factorial(int num1)
