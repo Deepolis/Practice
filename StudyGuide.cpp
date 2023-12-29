@@ -9,7 +9,6 @@
 #include "BaseCharacter.h"
 
 using namespace std; //includes entire std library; warning:updates in std can cause program errors
-using namespace Arron;
 
 namespace Arron
 {
@@ -19,13 +18,7 @@ namespace Arron
     }
 }
 
-namespace Larry
-{
-    void printName(const string name)
-    {
-        cout << name << endl;
-    }
-}
+using namespace Arron;
 
 //most common recursive function example. factorial calls itself until n = 1.
 unsigned long long Factorial(int num1)
@@ -56,7 +49,6 @@ inline void DoubleRoll(unsigned int& diceRoll)
     cout << diceRoll << endl;
 }
 
-
 struct RectangleVar //data type that allows grouping of related variables
 {
     int xCoor{};
@@ -65,7 +57,16 @@ struct RectangleVar //data type that allows grouping of related variables
     int height{100};
 };
 
-int main(int argc, char* argv[]) // begin program
+//linked list
+struct node // node data structure
+{
+    int number; // element in the first half of the node
+    struct node *next; // pointer in the 2nd node that points to the element of the next node
+};
+
+bool search(node *tree, int numero);
+
+int main(int argc, char *argv[]) // begin program
 //First element of argv is the program; the remaining are arguments passed to the program. argc is argument count.
 //arguments can be added through properties
 {
@@ -152,6 +153,7 @@ int main(int argc, char* argv[]) // begin program
     int studyArray[2][2] {{1,2},{3,4}}; //multidimensional array
     array<int,3>stdarray {1,2,3}; //std array
     vector <int> myVector {1,2,3,4,5}; //dynamic sizing and remember their size
+    vector<int> pvec (10, 0); //creates a vector of 10 ints initialized to 0
     vector<vector<int>> vector2D (3, vector<int>(10)); //parenthesis initialize the vector; 3 rows and 10 columns of vectors
     vector2D[1][2] = 42;
 
@@ -246,6 +248,41 @@ int main(int argc, char* argv[]) // begin program
     Dos.yCoor = 50;
    
     cout << Base::GetBaseCount() << endl;
+
+    Samuel=CopySamuel;
+    cout << Samuel.height << endl; //in this case will be a garbage value
+
+    node *list = NULL; // node called list that will point to the first node we're using
+
+    for (int i = 1; i < argc; i++) // iterate over the argument count
+    {
+        int number = atoi(argv[i]); // change a string number to an int number
+
+        node *n = new node; // allocate new memory that holds a new node
+        if (n == NULL)
+        {
+            return 42; // if the pointer points to nothing, error
+        }
+        n->number = number; // the number the temp node points to is the new number
+        n->next = NULL; // the 2nd elemnt in the node that will be a pointer initially contains nothing.
+        n->next = list; //next now points to list
+        list = n; //the actual list points to the first node
+    }
+    node *ptr = list; // points to the first node in the list
+    while(ptr != NULL)
+    {
+        cout << ptr->number << endl;
+        ptr = ptr->next;
+    }
+
+    ptr = list;
+    
+    while (ptr != NULL)
+    {
+        node *next = ptr->next;
+        free(ptr);
+        ptr = next;
+    }
 
     return 0; //end procgram. compiler would also add by default
 }
