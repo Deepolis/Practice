@@ -11,6 +11,7 @@ using namespace std;
 class Base
 {
 public: //can be used anywhere in the program
+    Base();
     Base(int Age, int gradeValue); //sets up the class. initializes varibles and performs tasks we assign.
  
     Base(const string NickName, short Age);
@@ -22,11 +23,11 @@ public: //can be used anywhere in the program
     
     Base(Base&& MoveBase); //Move constructor
 
-    ~Base(); //deals with freeing memory and closing files and/or connection.
+    virtual ~Base(); //deals with freeing memory and closing files and/or connection.
 
     Base& operator=(const Base& Other) // assignment operator typically a member function
     {
-        if (this != &Other) // if this(pointer) does not point to the address of the copy
+        if (this != &Other) // if this(object on the left side of =) does not point to the address of the copy
         {
             this->height = Other.height; //assign the height of Other into "this" object
         }
@@ -40,6 +41,10 @@ public: //can be used anywhere in the program
     short height;
     int* grade{};
     static int GetBaseCount() {return BaseCount;}
+    virtual void greeting(); 
+    /* classes store a virtual ptr that points to a virtual function table(vtable) containing
+    ptrs to the virtual functions. The function is then called indirectly through the function ptr,
+    which is slower.*/
 
 protected:
     

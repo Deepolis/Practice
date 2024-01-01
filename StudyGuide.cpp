@@ -7,7 +7,7 @@
 #include <memory>
 #include <cmath>
 #include "BaseCharacter.h"
-
+#include "Student.h"
 using namespace std; //includes entire std library; warning:updates in std can cause program errors
 
 namespace Arron
@@ -168,7 +168,7 @@ int main(int argc, char *argv[]) // begin program
 
     cout << Factorial(16) << endl;
 
-    int* pIntNum = &intNum; //points to the address intNum
+    int *pIntNum = &intNum; //points to the address intNum
     cout << pIntNum << endl; 
 
     const float* pFloatNum{&floatNum}; // pointer to const - floatNum cannot be changed via pointer
@@ -177,18 +177,18 @@ int main(int argc, char *argv[]) // begin program
     long* const pLongNum = &longNum; // constant pointer - value/address cannot be changed.
     cout << pLongNum << endl;
 
-    const double* const pDoubleNum{&doubleNum}; // address stored in pointer and value pointed to cannot be changed.
+    const double *const pDoubleNum{&doubleNum}; // address stored in pointer and value pointed to cannot be changed.
     cout << pDoubleNum << endl;
 
     //pHeap points to new data on heap that contains memory for an int that we initialize to 100.
     //pHeap is the only way to access the new value
-    int* pHeap{new int{100}};
+    int *pHeap{new int{100}};
     delete pHeap; // every new needs a delete else it will leak
     //delete only deletes the new int 100 not pHeap so pHeap is now a dangling pointer. 
     // pHeap still contains the address of memory
     pHeap = 0;
 
-    int* pArrPtr { new int[5] {1,2,3,4,5}};
+    int *pArrPtr { new int[5] {1,2,3,4,5}};
     delete[] pArrPtr;
     pArrPtr = 0;
 
@@ -249,7 +249,7 @@ int main(int argc, char *argv[]) // begin program
    
     cout << Base::GetBaseCount() << endl;
 
-    Samuel=CopySamuel;
+    Samuel=CopySamuel; //Overloaded operator
     cout << Samuel.height << endl; //in this case will be a garbage value
 
     node *list = NULL; // node called list that will point to the first node we're using
@@ -271,18 +271,30 @@ int main(int argc, char *argv[]) // begin program
     node *ptr = list; // points to the first node in the list
     while(ptr != NULL)
     {
-        cout << ptr->number << endl;
-        ptr = ptr->next;
+        cout << ptr->number << endl; //print the numbers in the list
+        ptr = ptr->next; // will eventually be NULL for the last element, ending the loop
     }
 
-    ptr = list;
-    
+    ptr = list; //point back to list
+
     while (ptr != NULL)
     {
         node *next = ptr->next;
         free(ptr);
         ptr = next;
     }
+
+    Base Janny("Janny", 50);
+    Student Robbie;
+
+    Janny.greeting();
+    Robbie.greeting();
+
+    Base *newPtr = new Student; //cannot use smart pointers
+    newPtr->greeting();
+
+    delete newPtr;
+    newPtr = 0;
 
     return 0; //end procgram. compiler would also add by default
 }

@@ -4,6 +4,11 @@
 
 using namespace std;
 
+Base::Base()
+{
+
+}
+
 Base::Base(const string NickName, short Age) // A function called Base(constructor) from inside the Base class scope.
 {
     cout << "My nickname is " << NickName << " and I am " << Age << " years old" << endl;
@@ -41,3 +46,5 @@ Base::~Base()
     delete grade;
     BaseCount--;
 }
+
+void Base::greeting() {cout << "I am faculty at LSU" << endl;}
