@@ -7,10 +7,10 @@
 
 using namespace std;
 
-class Student : public Base
+class Student final: public Base
 {
 public:
-     virtual void greeting() override; 
+     virtual void greeting() override final; 
      /*Derived classes inherit the vptr from the Base class
      and creates its own vtable. Override sets the ptr to a new instance of the function;
      not overriding sets the derived ptr to the original Base class function*/

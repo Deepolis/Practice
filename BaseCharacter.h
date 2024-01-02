@@ -43,7 +43,7 @@ public: //can be used anywhere in the program
     static int GetBaseCount() {return BaseCount;}
     virtual void greeting(); 
     /* classes store a virtual ptr that points to a virtual function table(vtable) containing
-    ptrs to the virtual functions. The function is then called indirectly through the function ptr,
+    an array of ptrs to the virtual functions. The function is then called indirectly through the function ptr,
     which is slower.*/
 
 protected:

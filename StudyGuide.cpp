@@ -293,8 +293,19 @@ int main(int argc, char *argv[]) // begin program
     Base *newPtr = new Student; //cannot use smart pointers
     newPtr->greeting();
 
-    delete newPtr;
-    newPtr = 0;
+    delete newPtr; //delete Student memory
+    newPtr = 0; // initialize newPtr so its not dangling
+
+    class STEM{};
+
+    class Math : public STEM {};
+
+    class Calculus : public Math{};
+
+    STEM *Stemptr{new Calculus};
+
+    //Turn a pointer to STEM to a pointer to Calculus
+    Calculus *StemToCalc{static_cast<Calculus*>(Stemptr)};
 
     return 0; //end procgram. compiler would also add by default
 }
