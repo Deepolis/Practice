@@ -66,6 +66,15 @@ struct node // node data structure
 
 bool search(node *tree, int numero);
 
+//Generic programming: using different data types as arguments 
+template<typename T> //Create a template where T can be any data type. typename means tell complier to deduce name type
+void SwapValue(T& value1, T& value2) //pass in a T& meaning we want to change the main values using reference
+{
+    T placeHolder = value1;
+    value1 = value2;
+    value2 = placeHolder;
+}
+    
 int main(int argc, char *argv[]) // begin program
 //First element of argv is the program; the remaining are arguments passed to the program. argc is argument count.
 //arguments can be added through properties
@@ -108,7 +117,6 @@ int main(int argc, char *argv[]) // begin program
     cout << "char size: " << sizeof(Char) << endl;
     cout << "String size: " << sizeof(String) << endl;
 
-
     /* Explicit type conversion between 2 incompatible types
     Cast NarcaseDose to an int. Common in random # generation.
     Truncation: discarding the fractional part when a decimal is converted */
@@ -125,7 +133,6 @@ int main(int argc, char *argv[]) // begin program
 
     //bitwise operators perform operations on bits of an int value.
 
-
     //ternary operators: condition ? result_if_true : result if false. shorthand if-else statement
     shortNum > intNum ? cout << shortNum : cout << intNum << endl;
 
@@ -137,7 +144,6 @@ int main(int argc, char *argv[]) // begin program
         default: cout << "not shortNum" << endl;
         break;
     }
-
 
     for (char i : String) // range based for loop. interate through string and stores the elements in i;
     {
@@ -202,7 +208,7 @@ int main(int argc, char *argv[]) // begin program
 
     //multiple shared pointers can point to the same memory location
     shared_ptr<int>S_Short{make_shared<int>(100)};
-    shared_ptr<string[]> S_String{new string[3]};
+    shared_ptr<string[]> S_String{new string[3]}; //string is an array pointer that dereferences the location of chars
     S_String[0] = "Daniel";
     S_String[1] = "Day";
     S_String[2] = "Lewis";
@@ -291,7 +297,7 @@ int main(int argc, char *argv[]) // begin program
     Robbie.greeting();
 
     Base *newPtr = new Student; //cannot use smart pointers
-    newPtr->greeting();
+    newPtr->greeting(); // point to the function and dereference
 
     delete newPtr; //delete Student memory
     newPtr = 0; // initialize newPtr so its not dangling
@@ -305,7 +311,23 @@ int main(int argc, char *argv[]) // begin program
     STEM *Stemptr{new Calculus};
 
     //Turn a pointer to STEM to a pointer to Calculus
-    Calculus *StemToCalc{static_cast<Calculus*>(Stemptr)};
+    Calculus *StemToCalc{static_cast<Calculus*>(Stemptr)}; //static_cast done at compile time
+
+    //dynamic_cast performs runtime checking to ensure validity of conversion.
+    //If not possible, dynamic returns a NULL ptr. Allows you to call a nonvirtual functoin from derived classes
+
+    char *Name = "Google"; //string is an abstraction of char *
+    cout << Name << endl;
+
+    int value1{89}, value2{42};
+    double value3{2.5}, value4{4.5};
+
+    SwapValue(value1, value2); //template
+    cout << "value1 is " << value1 << " and value 2 is " << value2 << endl;
+
+    SwapValue(value3, value4);
+    cout << "value1 is " << value3 << " and value 2 is " << value4 << endl;
+
 
     return 0; //end procgram. compiler would also add by default
 }
