@@ -74,7 +74,18 @@ void SwapValue(T& value1, T& value2) //pass in a T& meaning we want to change th
     value1 = value2;
     value2 = placeHolder;
 }
-    
+
+template<typename T,size_t N> // T type of array, N size of array
+T Mean(const T (&Array)[N]) //function will return the data type of T
+{
+    T Sum{};
+    for(size_t i {}; i < N; ++i) // i is the data type of N
+    {
+        Sum += Array[i];
+    }
+    return Sum / static_cast<T> (N);
+}
+
 int main(int argc, char *argv[]) // begin program
 //First element of argv is the program; the remaining are arguments passed to the program. argc is argument count.
 //arguments can be added through properties
@@ -328,6 +339,8 @@ int main(int argc, char *argv[]) // begin program
     SwapValue(value3, value4);
     cout << "value1 is " << value3 << " and value 2 is " << value4 << endl;
 
+    int SumArray[12]{1,2,3,4,5,6,7,8,9,10,11,60};
+    cout << Mean(SumArray) << endl;
 
     return 0; //end procgram. compiler would also add by default
 }
